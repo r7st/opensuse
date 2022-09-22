@@ -18,3 +18,4 @@ remove_packages:
 apparmor_profiles:
   - usr.sbin.chronyd
   - usr.sbin.sshd
+  - usr.sbin.NetworkManager

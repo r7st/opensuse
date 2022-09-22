@@ -1,0 +1,71 @@
+abi <abi/3.0>,
+
+include <tunables/global>
+
+/usr/sbin/NetworkManager {
+  include <abstractions/apache2-common>
+  include <abstractions/base>
+  include <abstractions/bash>
+  include <abstractions/consoles>
+  include <abstractions/dbus-session-strict>
+  include <abstractions/ubuntu-browsers.d/plugins-common>
+
+  capability dac_override,
+  capability net_admin,
+  capability net_raw,
+  capability sys_admin,
+
+  network inet6 raw,
+  network packet dgram,
+
+  /usr/bin/basename mrix,
+  /usr/bin/bash ix,
+  /usr/bin/cat mrix,
+  /usr/bin/chmod mrix,
+  /usr/bin/cmp mrix,
+  /usr/bin/dirname mrix,
+  /usr/bin/flock mrix,
+  /usr/bin/gawk mrix,
+  /usr/bin/hostname mrix,
+  /usr/bin/mkdir mrix,
+  /usr/bin/mktemp mrix,
+  /usr/bin/mv mrix,
+  /usr/bin/readlink mrix,
+  /usr/bin/realpath mrix,
+  /usr/bin/rm mrix,
+  /usr/bin/systemctl mrix,
+  /usr/bin/touch mrix,
+  /usr/libexec/chrony/helper mrix,
+  /usr/libexec/netconfig/netconfig.d/* mrix,
+  /usr/libexec/nm-daemon-helper mrix,
+  /usr/sbin/NetworkManager mr,
+  /usr/sbin/netconfig mrix,
+  owner /dev/rfkill rw,
+  owner /etc/NetworkManager/** rw,
+  owner /etc/host.conf r,
+  owner /etc/ld.so.cache r,
+  owner /etc/sysconfig/network/config r,
+  owner /proc/*/stat r,
+  owner /proc/cmdline r,
+  owner /proc/sys/kernel/random/boot_id r,
+  owner /proc/sys/net/** rw,
+  owner /proc/uptime r,
+  owner /run/NetworkManager/ rw,
+  owner /run/NetworkManager/** rw,
+  owner /run/chrony/chrony-helper/ w,
+  owner /run/netconfig.pid r,
+  owner /run/netconfig.pid w,
+  owner /run/netconfig/* rw,
+  owner /run/udev/data/* r,
+  owner /sys/bus/ r,
+  owner /sys/class/ r,
+  owner /sys/class/net/ r,
+  owner /sys/class/rfkill/ r,
+  owner /sys/devices/pci0000:00/0000:00:03.0/net/** r,
+  owner /sys/devices/virtual/net/** r,
+  owner /usr/etc/nsswitch.conf r,
+  owner /usr/libexec/netconfig/functions.netconfig r,
+  owner /var/lib/NetworkManager/ r,
+  owner /var/lib/NetworkManager/** rw,
+
+}
