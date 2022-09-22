@@ -24,7 +24,7 @@ Example Playbook
     - hosts: all
       become: yes
       roles:
-      - suse_server
+        - suse_server
 
 License
 -------
