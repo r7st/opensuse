@@ -8,3 +8,8 @@
     - "proc    /proc        proc        defaults,hidepid=2    0 0"
     - "tmpfs   /tmp         tmpfs   rw,nodev,nosuid,noexec 0 0"
     - "tmpfs   /var/tmp         tmpfs   rw,nodev,nosuid,noexec 0 0"
+
+- name: Remove other read /etc
+  ansible.builtin.file:
+    path: /etc
+    mode: o-r
