@@ -8,6 +8,10 @@
   include: packages.yml
   tags: packages
 
+- name: General system hardening
+  include: system.yml
+  tags: system
+
 - name: Install/configure aide
   include: aide.yml
   tags: aide
