@@ -14,3 +14,7 @@ install_packages:
 
 remove_packages:
   - cups
+
+apparmor_profiles:
+  - usr.sbin.chronyd
+  - usr.sbin.sshd

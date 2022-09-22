@@ -1,0 +1,43 @@
+---
+- name: Configure fstab
+  ansible.builtin.lineinfile:
+    path: /etc/fstab
+    line: "{{ item }}"
+  loop:
+    - "tmpfs /dev/shm tmpfs defaults,nosuid,inode64,nodev,noexec 0 0"
+    - "proc    /proc        proc        defaults,hidepid=2    0 0"
+    - "tmpfs   /tmp         tmpfs   rw,nodev,nosuid,noexec 0 0"
+    - "tmpfs   /var/tmp         tmpfs   rw,nodev,nosuid,noexec 0 0"
+
+- name: Remove other read /etc
+  ansible.builtin.file:
+    path: /etc
+    mode: o-r
+
+- name: Add some apparmor profiles
+  ansible.builtin.copy:
+    src: "files/apparmor.d/{{ item }}"
+    dest: "/etc/apparmor.d/{{ item }}"
+    owner: root
+    group: root
+    mode: 0600
+  with_items: "{{ apparmor_profiles }}"
+
+- name: Enforce apparmor
+  ansible.builtin.command:
+    cmd: aa-enforce /etc/apparmor.d/*
+  changed_when: false
+
+- name: No chroynd udp listener
+  ansible.builtin.lineinfile:
+    path: /etc/chrony.conf
+    line: "cmdport 0"
+  notify: Restart chronyd
+
+- name: Symlink nsswitch.conf
+  ansible.builtin.file:
+    state: link
+    src: /usr/etc/nsswitch.conf
+    path: /etc/nsswitch.conf
+    owner: root
+    group: root
