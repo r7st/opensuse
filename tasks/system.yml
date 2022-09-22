@@ -33,3 +33,11 @@
     path: /etc/chrony.conf
     line: "cmdport 0"
   notify: Restart chronyd
+
+- name: Symlink nsswitch.conf
+  ansible.builtin.file:
+    state: link
+    src: /usr/etc/nsswitch.conf
+    path: /etc/nsswitch.conf
+    owner: root
+    group: root
