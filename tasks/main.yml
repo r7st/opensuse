@@ -7,3 +7,7 @@
 - name: Install/remove packages
   include: packages.yml
   tags: packages
+
+- name: Install/configure aide
+  include: aide.yml
+  tags: aide

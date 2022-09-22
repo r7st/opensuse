@@ -1,0 +1,35 @@
+---
+- name: Install aide
+  community.general.zypper:
+    name: aide
+    state: present
+
+- name: Configure aide
+  ansible.builtin.copy:
+    src: files/aide.conf
+    dest: /etc/aide.conf
+    owner: root
+    group: root
+    mode: 0600
+
+- name: Check for db
+  ansible.builtin.stat:
+    path: /var/lib/aide/aide.db
+  register: aide_db
+
+- name: Initialize aide db
+  ansible.builtin.command:
+    cmd: aide --init
+  when: not aide_db.stat.exists
+
+- name: Configure cronjob
+  ansible.builtin.lineinfile:
+    path: /etc/cron.daily/aide
+    owner: root
+    group: root
+    mode: 0644
+    line: "{{ item }}"
+  loop:
+    - "mv /var/log/aide/aide.log /var/log/aide/aide.log-`date -I`"
+    - "aide --update"
+    - "cp /var/lib/aide/aide.db.new /var/lib/aide/aide.db"
