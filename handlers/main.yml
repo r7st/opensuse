@@ -1,2 +1,5 @@
 ---
-# handlers file for roles/suse_server
+- name: Restart chronyd
+  ansible.builtin.systemd:
+    name: chronyd
+    state: restarted

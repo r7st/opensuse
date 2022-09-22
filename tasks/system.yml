@@ -18,3 +18,9 @@
   ansible.builtin.command:
     cmd: aa-enforce /etc/apparmor.d/*
   changed_when: false
+
+- name: No chroynd udp listener
+  ansible.builtin.lineinfile:
+    path: /etc/chrony.conf
+    line: "cmdport 0"
+  notify: Restart chronyd
