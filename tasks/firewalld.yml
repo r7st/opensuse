@@ -1,0 +1,34 @@
+---
+- name: Check asserts
+  ansible.builtin.assert:
+    that:
+      - zabbix_agent is defined
+      - zabbix_agent is boolean
+
+- name: Ensure firewalld is installed
+  community.general.zypper:
+    name: firewalld
+    state: present
+
+- name: Start firewalld
+  ansible.builtin.systemd:
+    name: firewalld
+    state: started
+    enabled: true
+    masked: false
+
+- name: Add firewalld custom zone
+  ansible.builtin.template:
+    src: templates/custom.xml.j2
+    dest: /etc/firewalld/zones/custom.xml
+    owner: root
+    group: root
+    mode: 0644
+  notify: Restart firewalld
+
+- name: Set firewalld default zone to custom
+  ansible.builtin.lineinfile:
+    path: /etc/firewalld/firewalld.conf
+    regexp: "^DefaultZone=.*"
+    line: "DefaultZone=custom"
+  notify: Restart firewalld

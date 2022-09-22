@@ -1,2 +1,2 @@
 ---
-# defaults file for roles/suse_server
+zabbix_agent: false
