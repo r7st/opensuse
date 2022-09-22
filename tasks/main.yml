@@ -8,6 +8,10 @@
   include: packages.yml
   tags: packages
 
+- name: Configure firewall
+  include: firewalld.yml
+  tags: firewalld
+
 - name: General system hardening
   include: system.yml
   tags: system

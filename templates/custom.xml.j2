@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<zone target="DROP">
+  <service name="ssh"/>
+{% if zabbix_agent %}
+  <port port="10050" protocol="tcp"/>
+{% endif %}
+  <icmp-block name="echo-reply"/>
+  <icmp-block name="echo-request"/>
+  <icmp-block-inversion/>
+</zone>
