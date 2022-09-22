@@ -13,3 +13,8 @@
   ansible.builtin.file:
     path: /etc
     mode: o-r
+
+- name: Enforce apparmor
+  ansible.builtin.command:
+    cmd: aa-enforce /etc/apparmor.d/*
+  changed_when: false
