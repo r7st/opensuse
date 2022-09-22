@@ -1,2 +1,16 @@
 ---
-# vars file for roles/suse_server
+install_packages:
+  - aide
+  - cronie-anacron
+  - postfix
+  - mailx
+  - mlocate
+  - scap-security-guide
+  - openscap
+  - openscap-utils
+  - apparmor-profiles
+  - apparmor-utils
+  - apparmor-parser
+
+remove_packages:
+  - cups
