@@ -1,0 +1,26 @@
+abi <abi/3.0>,
+
+include <tunables/global>
+
+/usr/sbin/chronyd {
+  include <abstractions/base>
+  include <abstractions/dovecot-common>
+  include <abstractions/nameservice>
+  include <abstractions/postfix-common>
+
+  capability dac_override,
+  capability dac_read_search,
+  capability sys_time,
+
+  /etc/chrony.d/** r,
+  /etc/host.conf r,
+  /run/chrony/chronyd.pid w,
+  /run/netconfig/resolv.conf r,
+  /usr/sbin/chronyd mr,
+  owner /etc/chrony.conf r,
+  owner /etc/chrony.d/ r,
+  owner /run/chrony/chronyd.sock w,
+  owner /var/lib/chrony/drift r,
+  owner /var/lib/chrony/drift.tmp w,
+
+}

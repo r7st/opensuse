@@ -14,6 +14,15 @@
     path: /etc
     mode: o-r
 
+- name: Add some apparmor profiles
+  ansible.builtin.copy:
+    src: "files/apparmor.d/{{ item }}"
+    dest: "/etc/apparmor.d/{{ item }}"
+    owner: root
+    group: root
+    mode: 0600
+  with_items: "{{ apparmor_profiles }}"
+
 - name: Enforce apparmor
   ansible.builtin.command:
     cmd: aa-enforce /etc/apparmor.d/*
