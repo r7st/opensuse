@@ -6,7 +6,7 @@
 
 - name: Configure aide
   ansible.builtin.copy:
-    src: files/aide.conf
+    src: files/aide/aide.conf
     dest: /etc/aide.conf
     owner: root
     group: root
@@ -23,13 +23,9 @@
   when: not aide_db.stat.exists
 
 - name: Configure cronjob
-  ansible.builtin.lineinfile:
-    path: /etc/cron.daily/aide
+  ansible.builtin.copy:
+    src: files/aide/aide
+    dest: /etc/cron.daily/aide
     owner: root
     group: root
-    mode: 0644
-    line: "{{ item }}"
-  loop:
-    - "mv /var/log/aide/aide.log /var/log/aide/aide.log-`date -I`"
-    - "aide --update"
-    - "cp /var/lib/aide/aide.db.new /var/lib/aide/aide.db"
+    mode: 0740
