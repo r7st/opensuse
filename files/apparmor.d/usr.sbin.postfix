@@ -1,0 +1,55 @@
+abi <abi/3.0>,
+
+include <tunables/global>
+
+/usr/sbin/postfix {
+  include <abstractions/apache2-common>
+  include <abstractions/base>
+  include <abstractions/bash>
+  include <abstractions/consoles>
+  include <abstractions/postfix-common>
+  include <abstractions/ubuntu-browsers.d/plugins-common>
+  include <abstractions/user-mail>
+
+  capability dac_read_search,
+  capability kill,
+
+  /etc/aliases.lmdb k,
+  /usr/bin/bash ix,
+  /usr/bin/cmp mrix,
+  /usr/bin/egrep mrix,
+  /usr/bin/find mrix,
+  /usr/bin/grep mrix,
+  /usr/bin/sed mrix,
+  /usr/bin/sort mrix,
+  /usr/bin/tr mrix,
+  /usr/bin/uname mrix,
+  /usr/lib/postfix/bin/cleanup mrix,
+  /usr/lib/postfix/bin/local mrix,
+  /usr/lib/postfix/bin/master mrix,
+  /usr/lib/postfix/bin/pickup mrix,
+  /usr/lib/postfix/bin/postfix-script mrix,
+  /usr/lib/postfix/bin/qmgr mrix,
+  /usr/lib/postfix/bin/trivial-rewrite mrix,
+  /usr/sbin/postconf mrix,
+  /usr/sbin/postfix mr,
+  /usr/sbin/postlog mrix,
+  /usr/sbin/postqueue mrix,
+  /usr/sbin/postsuper mrix,
+  /var/lib/postfix/ r,
+  /var/spool/postfix/** rwk,
+  owner /etc/aliases.lmdb r,
+  owner /etc/ld.so.cache r,
+  owner /etc/postfix/ r,
+  owner /etc/postfix/ssl/ r,
+  owner /etc/postfix/ssl/certs/ r,
+  owner /proc/*/maps r,
+  owner /proc/filesystems r,
+  owner /proc/sys/crypto/fips_enabled r,
+  owner /proc/sys/kernel/ngroups_max r,
+  owner /usr/sbin/sendmail r,
+  owner /var/lib/postfix/* rwk,
+  owner /var/spool/postfix/ r,
+  owner /var/{,spool/}mail/* wk,
+
+}

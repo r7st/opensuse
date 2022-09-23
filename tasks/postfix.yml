@@ -1,0 +1,25 @@
+---
+- name: Install postfix
+  community.general.zypper:
+    name: postfix
+    state: present
+
+- name: Start/enable postfix
+  ansible.builtin.systemd:
+    name: postfix
+    state: started
+    enabled: true 
+
+- name: Postfix only on localhost
+  ansible.builtin.lineinfile:
+    path: /etc/postfix/main.cf
+    regexp: "^inet_interfaces = .*"
+    line: "inet_interfaces = 127.0.0.1"
+  notify: Restart postfix
+
+- name: Postfix ipv4 only
+  ansible.builtin.lineinfile:
+    path: /etc/postfix/main.cf
+    regexp: "^inet_protocols = .*"
+    line: "inet_protocols = ipv4"
+  notify: Restart postfix
