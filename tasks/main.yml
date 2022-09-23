@@ -16,6 +16,10 @@
   include: system.yml
   tags: system
 
+- name: Configure postfix
+  include: postfix.yml
+  tags: postfix
+
 - name: Install/configure aide
   include: aide.yml
   tags: aide

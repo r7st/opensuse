@@ -8,3 +8,8 @@
   ansible.builtin.systemd:
     name: firewalld
     state: restarted
+
+- name: Restart postfix
+  ansible.builtin.systemd:
+    name: postfix
+    state: restarted
