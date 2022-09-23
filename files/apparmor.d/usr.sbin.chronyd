@@ -1,3 +1,4 @@
+# Last Modified: Thu Sep 22 20:56:16 2022
 abi <abi/3.0>,
 
 include <tunables/global>
@@ -20,7 +21,7 @@ include <tunables/global>
   owner /etc/chrony.conf r,
   owner /etc/chrony.d/ r,
   owner /run/chrony/chronyd.sock w,
-  owner /var/lib/chrony/drift r,
-  owner /var/lib/chrony/drift.tmp w,
+  owner /var/lib/chrony/* r,
+  owner /var/lib/chrony/* w,
 
 }
