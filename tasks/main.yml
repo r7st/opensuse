@@ -1,9 +1,4 @@
 ---
-- name: Update server
-  community.general.zypper:
-    name: '*'
-    state: latest
-
 - name: Install/remove packages
   include: packages.yml
   tags: packages
