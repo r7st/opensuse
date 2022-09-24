@@ -11,6 +11,10 @@
   include: system.yml
   tags: system
 
+- name: Configure openssh-server
+  include: sshd.yml
+  tags: sshd
+
 - name: Configure postfix
   include: postfix.yml
   tags: postfix
