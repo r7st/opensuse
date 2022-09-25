@@ -1,0 +1,17 @@
+- name: Read passwd file
+  ansible.builtin.slurp:
+    src: /etc/passwd
+  register: passwd_file
+
+- name: Split passwd entires
+  ansible.builtin.set_fact:
+    entries: "{{ entries | default({}) | \
+      combine({item.split(':')[2] | string: item.split(':')[0] | string}) }}"
+  with_items: "{{ passwd_file['content'] | b64decode | split('\n') | select() }}"
+
+- name: Set system user shell to nologin
+  ansible.builtin.user:
+    name: "{{ item.value }}"
+    shell: /usr/sbin/nologin
+  loop: "{{ query('dict', entries) }}"
+  when: item.key | int > 0 and item.key | int < 1000

@@ -11,6 +11,10 @@
   include: system.yml
   tags: system
 
+- name: Remove system acc shells
+  include: system_acc.yml
+  tags: system_acc
+
 - name: Configure openssh-server
   include: sshd.yml
   tags: sshd
