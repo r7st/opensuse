@@ -4,7 +4,6 @@ install_packages:
   - cronie-anacron
   - postfix
   - mailx
-  - mlocate
   - scap-security-guide
   - openscap
   - openscap-utils
