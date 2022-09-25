@@ -8,7 +8,7 @@
   ansible.builtin.systemd:
     name: postfix
     state: started
-    enabled: true 
+    enabled: true
 
 - name: Postfix only on localhost
   ansible.builtin.lineinfile:
