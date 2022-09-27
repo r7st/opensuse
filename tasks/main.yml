@@ -15,6 +15,10 @@
   include: system.yml
   tags: system
 
+- name: Configure PAM
+  include: pam.yml
+  tags: pam
+
 - name: Remove system acc shells
   include: system_acc.yml
   tags: system_acc

@@ -1,0 +1,11 @@
+---
+- name: Limit password reuse
+  community.general.pamd:
+    name: common-password
+    type: password
+    module_path: pam_pwhistory.so
+    control: required
+    module_arguments:
+      - "remember=5"
+      - "use_authtok"
+    state: args_present
