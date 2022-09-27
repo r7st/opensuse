@@ -1,0 +1,23 @@
+---
+- name: Install chronyd
+  community.general.zypper:
+    name: chrony
+    state: present
+
+- name: Enable chronyd
+  ansible.builtin.systemd:
+    name: chronyd
+    state: started
+    enabled: true
+    
+- name: Mask systemd-timesyncd
+  ansible.builtin.systemd:
+    name: systemd-timesyncd
+    state: stopped
+    masked: true
+
+- name: No chronyd udp listener
+  ansible.builtin.lineinfile:
+    path: /etc/chrony.conf
+    line: "cmdport 0"
+  notify: Restart chronyd

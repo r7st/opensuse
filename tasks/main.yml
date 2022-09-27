@@ -7,6 +7,10 @@
   include: firewalld.yml
   tags: firewalld
 
+- name: Configure chronyd
+  include: chronyd.yml
+  tags: chronyd
+
 - name: General system hardening
   include: system.yml
   tags: system
