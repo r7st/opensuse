@@ -3,9 +3,36 @@
   community.general.pamd:
     name: common-password
     type: password
-    module_path: pam_pwhistory.so
     control: required
+    module_path: pam_pwhistory.so
     module_arguments:
       - "remember=5"
       - "use_authtok"
     state: args_present
+
+- name: Set deny for failed password attempts
+  community.general.pamd:
+    name: common-auth
+    type: auth
+    control: required
+    module_path: pam_unix.so
+    new_type: auth
+    new_control: required
+    new_module_path: pam_tally2.so
+    module_arguments:
+      - "onerr=fail"
+      - "deny=5"
+      - "silent"
+      - "audit"
+    state: after
+
+- name: Ensure pam_tally2.so in use
+  community.general.pamd:
+    name: common-account
+    type: account
+    control: required
+    module_path: pam_unix.so
+    new_type: account
+    new_control: required
+    new_module_path: pam_tally2.so
+    state: after
