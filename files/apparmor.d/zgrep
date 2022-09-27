@@ -1,0 +1,69 @@
+# Last Modified: Mon Sep 26 03:22:05 2022
+abi <abi/3.0>,
+
+include <tunables/global>
+
+# ------------------------------------------------------------------
+#
+#    Copyright (C) 2022 Christian Boltz
+#
+#    This program is free software; you can redistribute it and/or
+#    modify it under the terms of version 2 of the GNU General Public
+#    License published by the Free Software Foundation.
+#
+# ------------------------------------------------------------------
+
+
+profile zgrep /usr/bin/{x,}zgrep {
+  include <abstractions/base>
+  include <abstractions/bash>
+  include <abstractions/consoles>
+  include if exists <local/zgrep>
+
+  /dev/tty rw,
+  /usr/bin/bzip2 Cx -> helper,
+  /usr/bin/cat ix,
+  /usr/bin/egrep Cx -> helper,
+  /usr/bin/expr ix,
+  /usr/bin/fgrep Cx -> helper,
+  /usr/bin/grep Cx -> helper,
+  /usr/bin/gzip Cx -> helper,
+  /usr/bin/mktemp ix,
+  /usr/bin/rm ix,
+  /usr/bin/sed Cx -> sed,
+  /usr/bin/xz Cx -> helper,
+  /usr/bin/xzgrep r,
+  /usr/bin/zgrep Cx -> helper,
+  /usr/bin/zgrep r,
+  /usr/bin/zstd Cx -> helper,
+  /usr/bin/{ba,da,}sh ix,
+  owner /tmp/zgrep* rw,
+
+
+  profile helper {
+    include <abstractions/base>
+    include <abstractions/consoles>
+
+    capability dac_override,
+    capability dac_read_search,
+
+    /dev/tty w,
+    /usr/bin/bzip2 mr,
+    /usr/bin/grep mrix,
+    /usr/bin/gzip mr,
+    /usr/bin/xz mr,
+    /usr/bin/zstd mr,
+    /usr/bin/{ba,da,}sh ix,
+    /{,**} r,
+
+  }
+
+  profile sed {
+    include <abstractions/base>
+
+    /dev/tty rw,
+    /usr/bin/sed mr,
+    /usr/bin/{ba,da,}sh ix,
+
+  }
+}
