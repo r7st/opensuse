@@ -19,3 +19,4 @@ apparmor_profiles:
   - usr.sbin.sshd
   - usr.sbin.NetworkManager
   - usr.sbin.postfix
+  - zgrep
