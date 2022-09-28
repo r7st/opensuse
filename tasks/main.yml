@@ -19,6 +19,10 @@
   include: system_acc.yml
   tags: system_acc
 
+- name: Coredump config
+  include: coredump.yml
+  tags: coredump
+
 - name: Configure openssh-server
   include: sshd.yml
   tags: sshd
