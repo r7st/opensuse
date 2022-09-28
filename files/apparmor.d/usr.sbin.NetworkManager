@@ -1,4 +1,4 @@
-# Last Modified: Thu Sep 22 20:56:15 2022
+# Last Modified: Wed Sep 28 04:02:03 2022
 abi <abi/3.0>,
 
 include <tunables/global>
@@ -53,6 +53,7 @@ include <tunables/global>
   owner /proc/uptime r,
   owner /run/NetworkManager/ rw,
   owner /run/NetworkManager/** rw,
+  owner /run/chrony/** k,
   owner /run/chrony/** w,
   owner /run/netconfig.pid r,
   owner /run/netconfig.pid w,
