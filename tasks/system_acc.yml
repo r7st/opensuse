@@ -17,3 +17,8 @@
     shell: /usr/sbin/nologin
   loop: "{{ query('dict', entries) }}"
   when: item.key | int > 0 and item.key | int < 1000
+
+- name: Set nobody user shell to nologin
+  ansible.builtin.user:
+    name: nobody
+    shell: /usr/sbin/nologin
