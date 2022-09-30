@@ -11,6 +11,10 @@
   include: chronyd.yml
   tags: chronyd
 
+- name: Configure fail2ban
+  include: fail2ban.yml
+  tags: fail2ban
+
 - name: General system hardening
   include: system.yml
   tags: system
