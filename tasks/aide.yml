@@ -12,6 +12,14 @@
     group: root
     mode: 0600
 
+- name: Ensure aide log dir exists
+  ansible.builtin.file:
+    path: /var/log/aide
+    state: directory
+    owner: root
+    group: root
+    mode: 0750
+
 - name: Check for db
   ansible.builtin.stat:
     path: /var/lib/aide/aide.db
